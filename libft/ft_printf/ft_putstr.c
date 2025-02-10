@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wcapt <wcapt@student.42lausanne.ch>        +#+  +:+       +#+        */
+/*   By: wcapt < wcapt@student.42lausanne.ch >      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 18:06:16 by wcapt             #+#    #+#             */
-/*   Updated: 2024/10/18 17:53:27 by wcapt            ###   ########.fr       */
+/*   Updated: 2025/02/10 16:45:26 by wcapt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "../includes/ft_printf.h"
 
 ssize_t	ft_putstr(char *s)
 {

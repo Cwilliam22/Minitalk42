@@ -22,15 +22,20 @@ SRC =	ft_itoa.c ft_isalnum.c ft_isalpha.c ft_isascii.c ft_isdigit.c \
 		ft_putendl_fd.c ft_split.c ft_strchr.c ft_strrchr.c ft_calloc.c \
 		ft_memset.c ft_memchr.c ft_strjoin.c ft_strtrim.c ft_strlcpy.c \
 		ft_memcpy.c ft_memmove.c ft_memcmp.c ft_striteri.c ft_strncmp.c \
-		ft_strlcat.c ft_strmapi.c ft_substr.c ft_strnstr.c
+		ft_strlcat.c ft_strmapi.c ft_substr.c ft_strnstr.c 
 
 # Fichiers source bonus
 SRCBONUS =	ft_lstnew.c ft_lstsize.c ft_lstadd_front.c ft_lstlast.c \
 			ft_lstadd_back.c ft_lstdelone.c ft_lstiter.c ft_lstclear.c \
 			ft_lstmap.c
 
+FT_PRINTF_SRC = ft_printf/ft_printf.c ft_printf/ft_adresse.c ft_printf/ft_hexa_conv.c \
+                ft_printf/ft_putchar.c ft_printf/ft_putnbr.c ft_printf/ft_putstr.c
+
+FT_PRINTF_OBJ = $(FT_PRINTF_SRC:.c=.o)
+
 # Objets correspondants
-OBJ = $(SRC:.c=.o)
+OBJ = $(SRC:.c=.o) $(FT_PRINTF_OBJ)
 OBJBONUS = $(SRCBONUS:.c=.o)
 
 # Commande pour créer la bibliothèque
@@ -47,13 +52,17 @@ $(NAME): $(OBJ)
 bonus: $(OBJBONUS)
 	$(AR) $(NAME) $(OBJBONUS)
 
+# Compilation spécifique des fichiers printf/
+$(FT_PRINTF_DIR)/%.o: $(FT_PRINTF_DIR)/%.c
+	$(CC) $(CFLAGS) -c $< -o $@
+
 # Compilation des fichiers .o à partir des .c
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
 # Nettoyage des fichiers objets
 clean:
-	rm -f $(OBJ) $(OBJBONUS)
+	rm -f $(OBJ) $(OBJBONUS) $(PRINTF_OBJ)
 
 # Nettoyage complet : fichiers objets + bibliothèque
 fclean: clean

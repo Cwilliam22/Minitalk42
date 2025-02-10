@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putnbr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wcapt <wcapt@student.42lausanne.ch>        +#+  +:+       +#+        */
+/*   By: wcapt < wcapt@student.42lausanne.ch >      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 22:37:49 by wcapt             #+#    #+#             */
-/*   Updated: 2024/10/18 18:06:03 by wcapt            ###   ########.fr       */
+/*   Updated: 2025/02/10 16:47:30 by wcapt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "../includes/ft_printf.h"
 #include <stdio.h>
 
 ssize_t	ft_putnbr(int n)
@@ -20,7 +20,7 @@ ssize_t	ft_putnbr(int n)
 
 	iter = 0;
 	nbr = n;
-	if (n < -2147483648)
+	if (n <= -2147483648)
 		return (11);
 	if (nbr < 0)
 	{
@@ -44,7 +44,7 @@ ssize_t	ft_put_u_nbr(unsigned long nbr)
 	size_t	iter;
 
 	iter = 0;
-	if (nbr < 0)
+	if (nbr <= 0)
 	{
 		iter += ft_putchar('-');
 		nbr = -nbr;

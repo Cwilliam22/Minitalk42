@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wcapt <wcapt@student.42lausanne.ch>        +#+  +:+       +#+        */
+/*   By: wcapt < wcapt@student.42lausanne.ch >      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 16:38:52 by wcapt             #+#    #+#             */
-/*   Updated: 2024/10/24 13:16:59 by wcapt            ###   ########.fr       */
+/*   Updated: 2025/02/10 17:36:53 by wcapt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "../includes/ft_printf.h"
 
 ssize_t	ft_specifi(const char *str, va_list *args, size_t *i)
 {
@@ -68,6 +68,7 @@ int	ft_printf(const char *format, ...)
 	return (len);
 }
 
+/*
 #include <stdio.h>
 
 int	main(void)
@@ -77,7 +78,7 @@ int	main(void)
 	ft_printf("!\n");
 	return (0);
 }
-
+*/
 
 // Déclare une variable va_list pour gérer les arguments
 // Compteur pour parcourir la chaîne de format

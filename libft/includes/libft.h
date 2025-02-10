@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: williamcapt <williamcapt@student.42.fr>    +#+  +:+       +#+        */
+/*   By: wcapt < wcapt@student.42lausanne.ch >      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 00:18:24 by wcapt             #+#    #+#             */
-/*   Updated: 2025/02/06 13:53:13 by williamcapt      ###   ########.fr       */
+/*   Updated: 2025/02/10 17:10:40 by wcapt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,9 @@
 # include <stdlib.h>
 # include <unistd.h>
 
-#include <signal.h>
+# include <signal.h>
+
+# include "ft_printf.h"
 
 typedef struct s_list
 {

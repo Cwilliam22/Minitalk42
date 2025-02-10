@@ -6,43 +6,48 @@
 /*   By: wcapt < wcapt@student.42lausanne.ch >      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 14:07:38 by wcapt             #+#    #+#             */
-/*   Updated: 2025/02/10 15:33:40 by wcapt            ###   ########.fr       */
+/*   Updated: 2025/02/10 19:40:32 by wcapt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft/includes/libft.h"
 
-void get_signal(int signal)
+#include <unistd.h>
+#include <stdio.h>
+
+void	get_signal(int signal)
 {
-    static int  bit;
-    static int  m;
-    
-    if (signal == SIGUSR2)
-        m |= (1 << bit);
-    bit++;
-    if (bit == 8)
-    {
-        ft_putchar_fd(m, 1);
-        bit = 0;
-        m = 0;
+	static int				bit = 0;
+	static unsigned char	m = 0;
 
-    }
-
+	if (signal == SIGUSR2)
+		m |= (1 << (7 - bit));
+	bit++;
+	if (bit == 8)
+	{
+		if (m == '\0')
+			ft_printf("\n");
+		else
+			ft_printf("%c", m);
+		fflush(stdout);
+		bit = 0;
+		m = 0;
+	}
 }
 
-int main(int argc, char **argv)
+int	main(void)
 {
-    (void)argv;
-    ft_putstr_fd("PID : ", 1);
-    ft_putnbr_fd(getpid(), 1);
-    ft_putchar_fd('\n', 1);
-    ft_putstr_fd("Waiting for the message ...", 1);
-    ft_putchar_fd('\n', 1);
-    while (argc == 1)
-    {
-        signal(SIGUSR1, get_signal);
-        signal(SIGUSR2, get_signal);
-        pause();
-    }
-    return (0);
+	__pid_t	pid;
+
+	pid = getpid();
+	(void)argv;
+	if (argc != 1)
+		return (ft_printf("Too many arguments. Try again !!!\n"), 1);
+	ft_printf("PID : %d\n", pid);
+	ft_printf("Waiting for the message ...\n");
+	signal(SIGUSR2, get_signal);
+	signal(SIGUSR1, get_signal);
+	while (1)
+		pause();
+	return (0);
 }

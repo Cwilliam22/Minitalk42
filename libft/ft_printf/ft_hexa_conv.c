@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_hexa_conv.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wcapt <wcapt@student.42lausanne.ch>        +#+  +:+       +#+        */
+/*   By: wcapt < wcapt@student.42lausanne.ch >      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 01:48:18 by wcapt             #+#    #+#             */
-/*   Updated: 2024/10/17 06:30:39 by wcapt            ###   ########.fr       */
+/*   Updated: 2025/02/10 16:44:52 by wcapt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "../includes/ft_printf.h"
 
 ssize_t	ft_hexa_conv(unsigned int c, int index)
 {

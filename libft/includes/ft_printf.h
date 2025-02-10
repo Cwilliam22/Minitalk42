@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wcapt <wcapt@student.42lausanne.ch>        +#+  +:+       +#+        */
+/*   By: wcapt < wcapt@student.42lausanne.ch >      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 16:08:20 by wcapt             #+#    #+#             */
-/*   Updated: 2024/10/17 06:13:56 by wcapt            ###   ########.fr       */
+/*   Updated: 2025/02/10 17:12:35 by wcapt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 # include <stdarg.h>
 # include <stdlib.h>
 # include <unistd.h>
+
+# include "libft.h"
 
 int		ft_printf(const char *format, ...);
 ssize_t	ft_putstr(char *s);
