@@ -6,7 +6,7 @@
 /*   By: wcapt < wcapt@student.42lausanne.ch >      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 14:07:38 by wcapt             #+#    #+#             */
-/*   Updated: 2025/02/10 19:40:32 by wcapt            ###   ########.fr       */
+/*   Updated: 2025/02/12 18:28:58 by wcapt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	get_signal(int signal)
 	}
 }
 
-int	main(void)
+int	main(int argc, char **argv)
 {
 	__pid_t	pid;
 
@@ -45,9 +45,11 @@ int	main(void)
 		return (ft_printf("Too many arguments. Try again !!!\n"), 1);
 	ft_printf("PID : %d\n", pid);
 	ft_printf("Waiting for the message ...\n");
-	signal(SIGUSR2, get_signal);
-	signal(SIGUSR1, get_signal);
-	while (1)
+	while (argc == 1)
+	{
+		signal(SIGUSR2, get_signal);
+		signal(SIGUSR1, get_signal);
 		pause();
+	}
 	return (0);
 }

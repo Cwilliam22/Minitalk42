@@ -6,7 +6,7 @@
 /*   By: wcapt < wcapt@student.42lausanne.ch >      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 14:07:20 by wcapt             #+#    #+#             */
-/*   Updated: 2025/02/10 19:37:28 by wcapt            ###   ########.fr       */
+/*   Updated: 2025/02/12 18:52:12 by wcapt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	pid_control(char *str)
 	return (1);
 }
 
-int	get_bits(char octet, __pid_t pid_serveur)
+int	get_bits(unsigned char octet, __pid_t pid_serveur)
 {
 	int	i;
 
@@ -33,10 +33,16 @@ int	get_bits(char octet, __pid_t pid_serveur)
 	while (i >= 0)
 	{
 		if ((octet >> i) & 1)
-			kill(pid_serveur, SIGUSR2);
+		{
+			if (kill(pid_serveur, SIGUSR2) == -1)
+				return (0);
+		}
 		else
-			kill(pid_serveur, SIGUSR1);
-		usleep(3000);
+		{
+			if (kill(pid_serveur, SIGUSR1) == -1)
+				return (0);
+		}
+		usleep(300);
 		i--;
 	}
 	return (1);
