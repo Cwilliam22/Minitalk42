@@ -6,7 +6,7 @@
 /*   By: wcapt < wcapt@student.42lausanne.ch >      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 14:07:20 by wcapt             #+#    #+#             */
-/*   Updated: 2025/02/12 18:52:12 by wcapt            ###   ########.fr       */
+/*   Updated: 2025/02/13 12:50:17 by wcapt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	get_bits(unsigned char octet, __pid_t pid_serveur)
 			if (kill(pid_serveur, SIGUSR1) == -1)
 				return (0);
 		}
-		usleep(300);
+		usleep(100);
 		i--;
 	}
 	return (1);

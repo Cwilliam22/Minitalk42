@@ -6,7 +6,7 @@
 /*   By: wcapt < wcapt@student.42lausanne.ch >      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 14:07:38 by wcapt             #+#    #+#             */
-/*   Updated: 2025/02/12 18:28:58 by wcapt            ###   ########.fr       */
+/*   Updated: 2025/02/13 12:39:42 by wcapt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ int	main(int argc, char **argv)
 	{
 		signal(SIGUSR2, get_signal);
 		signal(SIGUSR1, get_signal);
-		pause();
 	}
 	return (0);
 }
