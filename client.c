@@ -6,11 +6,17 @@
 /*   By: wcapt < wcapt@student.42lausanne.ch >      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 14:07:20 by wcapt             #+#    #+#             */
-/*   Updated: 2025/02/13 12:50:17 by wcapt            ###   ########.fr       */
+/*   Updated: 2025/02/13 16:31:28 by wcapt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft/includes/libft.h"
+
+void	get_confirmation(int signal)
+{
+	if (signal == SIGUSR2)
+		ft_printf("Message received.\n");
+}
 
 int	pid_control(char *str)
 {
@@ -50,7 +56,7 @@ int	get_bits(unsigned char octet, __pid_t pid_serveur)
 
 int	main(int argc, char **argv)
 {
-	__pid_t	pid_serveur;
+	pid_t	pid_serveur;
 
 	if (argc == 3)
 	{
@@ -64,6 +70,8 @@ int	main(int argc, char **argv)
 			argv[2]++;
 		}
 		get_bits('\n', pid_serveur);
+		if (signal(SIGUSR2, get_confirmation) == SIG_ERR)
+			return (ft_printf("Error during the get_confirmation.\n"), 1);
 	}
 	else
 		return (ft_printf("The number of argument is incorrect.\n"), 1);
