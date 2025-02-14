@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   client.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wcapt < wcapt@student.42lausanne.ch >      +#+  +:+       +#+        */
+/*   By: williamcapt <williamcapt@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 14:07:20 by wcapt             #+#    #+#             */
-/*   Updated: 2025/02/14 14:12:00 by wcapt            ###   ########.fr       */
+/*   Updated: 2025/02/14 19:21:48 by williamcapt      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,9 @@
 
 void	get_confirmation(int signal)
 {
+	ft_printf("PID valide ! Sending in progress... \n");
 	if (signal == SIGUSR2)
-		ft_printf("Message received.\n");
+		ft_printf("Message received ✅\n");
 }
 
 int	pid_control(char *str)
@@ -60,6 +61,8 @@ int	main(int argc, char **argv)
 
 	if (argc == 3)
 	{
+		if (signal(SIGUSR2, get_confirmation) == SIG_ERR)
+			return (ft_printf("Error during the get_confirmation.\n"), 1);
 		pid_serveur = ft_atoi(argv[1]);
 		if (pid_serveur < 2 || pid_serveur > 4194304)
 			return (ft_printf("The PID is invalid. \n"), 1);
@@ -69,13 +72,10 @@ int	main(int argc, char **argv)
 				return (1);
 			argv[2]++;
 		}
-		get_bits('\n', pid_serveur);
-		if (signal(SIGUSR2, get_confirmation) == SIG_ERR)
-			return (ft_printf("Error during the get_confirmation.\n"), 1);
+		get_bits('\0', pid_serveur);
 	}
 	else
 		return (ft_printf("The number of argument is incorrect.\n"), 1);
-	ft_printf("PID valide ! Sending in progress... \n");
 	return (0);
 }
 
