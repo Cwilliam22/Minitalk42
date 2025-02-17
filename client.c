@@ -3,20 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   client.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: williamcapt <williamcapt@student.42.fr>    +#+  +:+       +#+        */
+/*   By: wcapt < wcapt@student.42lausanne.ch >      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 14:07:20 by wcapt             #+#    #+#             */
-/*   Updated: 2025/02/14 19:21:48 by williamcapt      ###   ########.fr       */
+/*   Updated: 2025/02/17 16:06:52 by wcapt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft/includes/libft.h"
 
+volatile sig_atomic_t g_signal_received = 0;
+
 void	get_confirmation(int signal)
 {
 	ft_printf("PID valide ! Sending in progress... \n");
 	if (signal == SIGUSR2)
+	{
 		ft_printf("Message received ✅\n");
+		g_signal_received = 1;
+	}
 }
 
 int	pid_control(char *str)
@@ -73,6 +78,8 @@ int	main(int argc, char **argv)
 			argv[2]++;
 		}
 		get_bits('\0', pid_serveur);
+		if (!g_signal_received)
+			pause();
 	}
 	else
 		return (ft_printf("The number of argument is incorrect.\n"), 1);

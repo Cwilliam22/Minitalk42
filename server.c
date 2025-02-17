@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   server.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: williamcapt <williamcapt@student.42.fr>    +#+  +:+       +#+        */
+/*   By: wcapt < wcapt@student.42lausanne.ch >      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 14:07:38 by wcapt             #+#    #+#             */
-/*   Updated: 2025/02/14 19:21:30 by williamcapt      ###   ########.fr       */
+/*   Updated: 2025/02/17 15:34:06 by wcapt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,14 @@ static void	put_in_string(unsigned char m, char **dest, pid_t pid_client)
 {
 	char		*new_dest;
 
+	(void) pid_client;
 	if (m == '\0')
 	{
-		ft_putstr_fd(*dest, 1);
+		if (*dest)
+			ft_putstr_fd(*dest, 1);
 		ft_putchar_fd('\n', 1);
 		if (kill(pid_client, SIGUSR2) == -1)
-				ft_printf("Error with the confirmation message.\n");
+			ft_printf("Error with the confirmation message.\n");
 		free(*dest);
 		*dest = NULL;
 	}
