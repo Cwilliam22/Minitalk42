@@ -1,51 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   server.c                                           :+:      :+:    :+:   */
+/*   server2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wcapt < wcapt@student.42lausanne.ch >      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/10 14:07:38 by wcapt             #+#    #+#             */
-/*   Updated: 2025/02/20 13:48:35 by wcapt            ###   ########.fr       */
+/*   Created: 2025/02/20 11:18:45 by wcapt             #+#    #+#             */
+/*   Updated: 2025/02/20 13:45:40 by wcapt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft/includes/libft.h"
 
-#define BUFFER_SIZE 65000
+static char	g_temp[2] = {0, 0};
 
-static void	utils(pid_t pid_client)
+static void	put_in_string(unsigned char m, char **dest, pid_t pid_client)
 {
-	ft_putchar_fd('\n', 1);
-	if (kill(pid_client, SIGUSR2) == -1)
-		ft_printf("Error with the confirmation message.\n");
-}
+	char		*new_dest;
 
-static void	put_in_string(unsigned char m, pid_t pid_client)
-{
-	static char		buffer[BUFFER_SIZE];
-	static size_t	len = 0;
-
+	(void) pid_client;
 	if (m == '\0')
 	{
-		if (len > 0)
-		{
-			write(1, buffer, len);
-			len = 0;
-		}
-		utils(pid_client);
+		if (*dest)
+			ft_putstr_fd(*dest, 1);
+		ft_putchar_fd('\n', 1);
+		if (kill(pid_client, SIGUSR2) == -1)
+			ft_printf("Error with the confirmation message.\n");
+		free(*dest);
+		*dest = NULL;
 	}
 	else
 	{
-		if (len < BUFFER_SIZE - 1)
-		{
-			buffer[len++] = m;
-		}
+		g_temp[0] = m;
+		if (!*dest)
+			*dest = ft_strdup(g_temp);
 		else
 		{
-			write(1, buffer, len);
-			len = 0;
-			buffer[len++] = m;
+			new_dest = ft_strjoin(*dest, g_temp);
+			free(*dest);
+			*dest = new_dest;
 		}
 	}
 }
@@ -55,6 +48,7 @@ void	get_signal(int signal, siginfo_t *info, void *context)
 	static int				bit = 0;
 	static unsigned char	m = 0;
 	pid_t					pid_client;
+	static char				*dest;
 
 	(void)context;
 	pid_client = info->si_pid;
@@ -63,7 +57,7 @@ void	get_signal(int signal, siginfo_t *info, void *context)
 	bit++;
 	if (bit == 8)
 	{
-		put_in_string(m, pid_client);
+		put_in_string(m, &dest, pid_client);
 		bit = 0;
 		m = 0;
 	}

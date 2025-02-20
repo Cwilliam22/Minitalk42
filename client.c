@@ -6,13 +6,13 @@
 /*   By: wcapt < wcapt@student.42lausanne.ch >      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 14:07:20 by wcapt             #+#    #+#             */
-/*   Updated: 2025/02/17 16:06:52 by wcapt            ###   ########.fr       */
+/*   Updated: 2025/02/20 11:20:49 by wcapt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft/includes/libft.h"
 
-volatile sig_atomic_t g_signal_received = 0;
+volatile sig_atomic_t	g_signal_received = 0;
 
 void	get_confirmation(int signal)
 {
